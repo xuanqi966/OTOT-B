@@ -17,14 +17,15 @@ exports.index = function (req, res) {
     })
 }
 
-// TODO: add function to check input validity
 exports.create = function (req, res) {
+    console.log(req.body)
     var record = new Record({
         title: req.body.title,
         author: req.body.author,
         borrower: req.body.borrower,
         contact_number: req.body.contact_number
     })
+    
     record.save(function (err) {
         if (err) {
             res.json(err)
@@ -39,43 +40,52 @@ exports.create = function (req, res) {
 
 exports.read = function (req, res) {
     Record.findById(req.params.record_id, function (err, record) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json({
-            message: 'Record loading..',
-            data: record
-        })
+        } else {
+            res.json({
+                message: 'Record loading..',
+                data: record
+            })
+        }
     })
 }
 
 exports.update = function (req, res) {
+    console.log(req.params)
     Record.findById(req.params.record_id, function (err, record) {
-        if (err)
+        console.log(record)
+        if (err) {
             res.send(err);
+        } else {
+            record.title = req.body.title,
+            record.author = req.body.author,
+            record.borrower = req.body.borrower
+            record.contact_number = req.body.contact_number
 
-        record.title = req.body.title,
-        record.author = req.body.author,
-        record.borrower = req.body.borrower
-        record.contact_number = req.body.contact_number
-
-        record.save(function (err) {
-            if (err)
-                res.json(err);
-            res.json({
-                message: 'Record Info updated',
-                data: record
+            record.save(function (err) {
+                if (err) {
+                    res.json(err);
+                } else {
+                    res.json({
+                        message: 'Record Info updated',
+                        data: record
+                    });
+                }
             });
-        });
+        }
     });
 };
 // Handle delete contact
 exports.delete = function (req, res) {
-    Record.remove({ _id: req.params.record_id }, function (err, record) {
-        if (err)
+    Record.deleteOne({ _id: req.params.record_id }, function (err, record) {
+        if (err) {
             res.send(err);
-        res.json({
-            status: "success",
-            message: 'Record deleted'
-        });
+        } else {
+            res.json({
+                status: "success",
+                message: 'Record deleted'
+            });
+        }
     });
 };

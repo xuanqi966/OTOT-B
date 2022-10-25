@@ -14,7 +14,6 @@ router.route('/record')
 
 router.route('/record/:record_id')
     .get(recordController.read)
-    .patch(recordController.update)
     .put(recordController.update)
     .delete(recordController.delete)
 
