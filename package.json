@@ -4,10 +4,9 @@
   "description": "otot-task-b",
   "main": "index.js",
   "scripts": {
+    "start": "NODE_ENV=prod node index.js",
     "dev": "NODE_ENV=dev nodemon index",
-    "test": "NODE_ENV=test mocha --recursive --exit",
-    "prod": "NODE_ENV=prod nodemon index",
-    "start": "nodemon index"
+    "test": "NODE_ENV=test mocha --recursive --exit"
   },
   "repository": {
     "type": "git",
