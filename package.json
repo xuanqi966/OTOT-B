@@ -7,7 +7,7 @@
     "dev": "NODE_ENV=dev nodemon index",
     "test": "NODE_ENV=test mocha --recursive --exit",
     "prod": "NODE_ENV=prod nodemon index",
-    "start": "serve -s build"
+    "start": "nodemon index"
   },
   "repository": {
     "type": "git",
