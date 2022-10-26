@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=dev nodemon index",
-    "test": "NODE_ENV=test mocha --recursive --exit"
+    "test": "NODE_ENV=test mocha --recursive --exit",
+    "prod": "NODE_ENV=prod nodemon index"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "express": "^4.18.2",
     "mocha": "^10.1.0",
     "mongoose": "^6.6.7",
+    "serve": "^14.0.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
