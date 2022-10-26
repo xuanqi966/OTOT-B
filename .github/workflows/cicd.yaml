@@ -46,6 +46,7 @@ jobs:
       - name: Get timestamp
         uses: gerred/actions/current-time@master
         id: current-time
+        run: echo ${{ steps.current-time.outputs.time }}
       
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
