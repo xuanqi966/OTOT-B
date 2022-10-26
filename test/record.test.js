@@ -86,6 +86,7 @@ describe("POST /library", () => {
             })
             .end((err, res) => {
                 res.should.have.status(200)
+                console.log(res.body)
                 expect(res.body.data.title).to.equal("Game of Thrones")
                 expect(res.body.data.author).to.equal("Martin")
                 expect(res.body.data.borrower).to.equal("Xuanqi")
