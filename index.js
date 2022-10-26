@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true});
-//mongoose.connect('mongodb+srv://xuanqi:Password.1997@cs3219.wzic27q.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true});
 
 var db = mongoose.connection
 
