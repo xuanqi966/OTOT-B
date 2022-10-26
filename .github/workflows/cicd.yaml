@@ -59,37 +59,36 @@ jobs:
   #         eb deploy
 
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: Set env to prod
-        run: NODE_ENV=prod
+  #     - name: Set env to prod
+  #       run: NODE_ENV=prod
 
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+  #     - name: Generate deployment package
+  #       run: zip -r deploy.zip . -x '*.git*'
       
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+  #     - name: Configure AWS Credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: ap-northeast-1
+      
+  #     - name: Copy to S3 bucket
+  #       run: aws s3 cp deploy.zip s3://elasticbeanstalk-ap-northeast-1-121871211535
+      
+  #     - name: Print done message
+  #       run: echo "CD pipeline finished success"
+      
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v20
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
-      
-      # - name: Deploy to EB
-      #   uses: einaregilsson/beanstalk-deploy@v20
-      #   with:
-      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     application_name: project-cs3219
-      #     environment_name: Projectcs3219-env
-      #     region: ap-northeast-1
-          #deployment_package: deploy.zip
-      
-      - name: Copy to S3 bucket
-        run: aws s3 cp deploy.zip s3://elasticbeanstalk-ap-northeast-1-121871211535
-      
-      - name: Print done message
-        run: echo "CD pipeline finished success"
-
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: project-cs3219
+          environment_name: Projectcs3219-env
+          region: ap-northeast-1
+          deployment_package: deploy.zip
