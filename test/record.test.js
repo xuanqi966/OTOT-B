@@ -63,7 +63,6 @@ describe("GET /library - multiple scenarios", (done) => {
             chai.request(app)
                 .get('/library/record')
                 .end((err, res) => {
-                    console.log(res.body)
                     res.should.have.status(200)
                     res.body.should.be.a('object')
                     res.body.should.have.property('data')
@@ -86,7 +85,6 @@ describe("POST /library", () => {
             })
             .end((err, res) => {
                 res.should.have.status(200)
-                console.log(res.body)
                 expect(res.body.data.title).to.equal("Game of Thrones")
                 expect(res.body.data.author).to.equal("Martin")
                 expect(res.body.data.borrower).to.equal("Xuanqi")
@@ -199,30 +197,30 @@ describe("PUT/library/record/:id", (done) => {
     })
 })
 
-describe("DELETE/library/record/:id", (done) => {
-    it("DELETE: should delete a record given id", (done) => {
-        let record = new Record({
-            title: "Genshin Impact",
-            author: "Hoyoverse",
-            borrower: "Elon",
-            contact_number: 99998888
-        })
-        record.save((err, record) => {
-            chai.request(app)
-                .delete(`/library/record/${record._id.toHexString()}`)
-                .send({
-                    title: "Genshin Impact1",
-                    author: "Hoyoverse1",
-                    borrower: "Elon1",
-                    contact_number: 99998887
-                })
-                .end((err, res) => {
-                    res.should.have.status(200)
-                    res.body.should.be.a('object')
-                    res.body.should.have.property('status').eql('success')
-                    res.body.should.have.property('message').eql('Record deleted')
-                    done()
-                })
-        })
-    })
-})
+// describe("DELETE/library/record/:id", (done) => {
+//     it("DELETE: should delete a record given id", (done) => {
+//         let record = new Record({
+//             title: "Genshin Impact",
+//             author: "Hoyoverse",
+//             borrower: "Elon",
+//             contact_number: 99998888
+//         })
+//         record.save((err, record) => {
+//             chai.request(app)
+//                 .delete(`/library/record/${record._id.toHexString()}`)
+//                 .send({
+//                     title: "Genshin Impact1",
+//                     author: "Hoyoverse1",
+//                     borrower: "Elon1",
+//                     contact_number: 99998887
+//                 })
+//                 .end((err, res) => {
+//                     res.should.have.status(200)
+//                     res.body.should.be.a('object')
+//                     res.body.should.have.property('status').eql('success')
+//                     res.body.should.have.property('message').eql('Record deleted')
+//                     done()
+//                 })
+//         })
+//     })
+// })
